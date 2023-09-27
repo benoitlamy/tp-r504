@@ -3,6 +3,7 @@ def puissance(a,b):
 		raise TypeError("Only integers are allowed")
 	if not type(b) is int:
 		raise TypeError("Only integers are allowed")
+
 	return a ** b
 	
 #print ("fonctions puissance")
