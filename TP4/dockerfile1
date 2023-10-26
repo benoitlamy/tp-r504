@@ -1,0 +1,30 @@
+# Utiliser l'image de base Debian 11
+FROM debian:11
+
+# Mise à jour des paquets Debian et installation des outils de développement
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y \
+    build-essential \
+    pkg-config \
+    python-dev \
+    python3-pip \
+    default-libmysqlclient-dev
+
+# Mise à jour de pip
+RUN pip3 install --upgrade pip
+
+# Installation des paquets Python flask-mysqldb et mysql-connector-python
+RUN pip install flask-mysqldb mysql-connector-python
+
+
+
+# Créer le dossier /srv/templates
+RUN mkdir -p /srv/templates
+
+# Copier le fichier index.html dans /srv/templates
+COPY index.html /srv/templates/
+
+# Copier le fichier app1.py dans /srv
+COPY app_1.py /srv/
+
+CMD ["flask","--app","/srv/app_1","run","--host=0.0.0.0"]
